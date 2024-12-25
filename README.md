@@ -15,8 +15,7 @@ To run this project locally, follow these steps:
 3. Open `index.html` in your preferred browser
 
 ## Deployment
-The website is deployed using [GitHub Pages](https://pages.github.com/).
-
+The website is deployed using vercel https://the-blue-ink.vercel.app/
 ## Usage
 Feel free to explore the website and provide feedback. Contributions are welcome!
 
