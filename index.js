@@ -41,8 +41,11 @@ app.get('/search', (req, res) => {
         res.send(`<h1>Search results for: ${q}</h1>`)
     }
 })*/
+arr=["Dive" ,"deep" ,"into" ,"the" ,"mysteries" ,"of" ,"the" ,"cosmos", "where", "physics,", "chemistry,","and", "math", "reveal" ,"the", "unknown."] 
+
 app.get('/', (req, res) => {
-    res.render('home')
+    res.render('home',{arr:arr})
+    console.log(arr.length)
 })
 app.listen(300,()=>{
     console.log("server is running!!")

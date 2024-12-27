@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <meta name="viewport" content="width=device-width, initial-scale=-1.1">
     <title>The Blue Ink</title>
     <link rel="stylesheet" type="text/css" href="/css/home.css">
-    <link rel="icon" type="image/x-icon" href="/1693219223961.ico">
-    <script src="https://kit.fontawesome.com/beb82e6ecb.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="/image/1693219223961_new-removebg-preview.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="/js/home.js"></script>
 </head>
 <body >
@@ -14,7 +16,7 @@
     <header class="head">
         <img src="/image/1693219223961_new-removebg-preview.ico" alt="mylog" id="img_1">
         <img src="/image/menu_sign.ico" alt="mylog" id="img_menu">
-        <Button id="img_login"><img src="/image/Login_pic.ico" alt="mylog" id="img_login_pic"></Button>
+        <Button id="img_login"><img src="/image/Login_pic.ico" alt="mylog" id="img_login_pic" onclick="showForm()"></Button>
         
         <ul>
             <li><select id="drop"><option disabled selected>Course</option></select></li>
@@ -60,7 +62,7 @@
 
     </header>
     
-    <button id="butt">Login/Register</button>
+    <button id="butt" onclick="showForm()">Login/Register</button>
     <div class="slider">
         <img class ="i1" src="/image/Designer (1).png" alt="img1">
     </div>
@@ -71,7 +73,7 @@
             <br><span id="sp_3">Unlock your potential by signing up with The Blue Ink and get valuable experience.</span>
             </h1>
         </section>
-        <button  class="butt_1">Watch Lecture Now</button>
+        <button  class="butt_1" onclick="window.open('https://youtube.com/@theblueink...1814');">Watch Lecture Now</button>
         <section class="image_area">
             <img class="img_3" src="/image/94998548_9881382-removebg-preview.png" alt="thinking_man">
 
@@ -88,10 +90,123 @@
         </section>
 
     </div>
+    <div id="form-overlay" class="form-overlay">
+        <div class="form-container">
+            <div class="form-header">
+                <h2 id="regist">Register</h2>
+                <button id="cancel-button" class="cancel-btn">&times;</button>
+            </div>
+            <form>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+    
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+    
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="Enter your state" required>
+    
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" placeholder="Enter your country" required>
+    
+                <label for="class">Class</label>
+                <input type="text" id="class" name="class" placeholder="Enter your class" required>
+    
+                <label for="exam">Exam Preparing For</label>
+                <input type="text" id="exam" name="exam" placeholder="Enter the exam" required>
+    
+                <label for="password">Set Password</label>
+                <input type="password" id="password" name="password" placeholder="Set your password" required>
+    
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="button" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+     <div class="dynamic-text">
+      
+           
+            <span class="word"><%=arr[0]%></span>
+            <span class="word"><%=arr[1]%></span>
+            <span class="word"><%=arr[2]%></span>
+            <span class="word"><%=arr[3]%></span>
+            
+            <span class="word"><%=arr[4]%></span>
+            <span class="word"><%=arr[5]%></span>
+            <span class="word"><%=arr[6]%></span>
+            <span class="word"><%=arr[7]%></span>
+            <span class="word"><%=arr[8]%></span>
+            <span class="word"><%=arr[9]%></span>
+            
+            <span class="word"><%=arr[10]%></span>
+            <span class="word"><%=arr[11]%></span>
+            <span class="word"><%=arr[12]%></span>
+            <span class="word"><%=arr[13]%></span>
+            <span class="word"><%=arr[14]%></span>
+            <span class="word"><%=arr[15]%></span>
+            
+        </div>
+
+
+
     <div class="checks">
 
     </div>
 
+  <div class="feedback-container">
+    <h2>Feedback Form</h2>
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Your Name">
+
+    <label for="school">School/College</label>
+    <input type="text" id="school" placeholder="Your School/College">
+
+    <label for="feedback">Feedback</label>
+    <textarea id="feedback" placeholder="Your Feedback"></textarea>
+
+    <button>Submit</button>
+  </div>
+ 
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-media">
+        <a href="https://youtube.com/@theblueink...1814?si=GUD3A8iotN0lJ0hc" target="_blank"><i class="fab fa-youtube you"></i></a>
+        <a href="https://github.com/Fark0910" target="_blank"><i class="fab fa-github git"></i></a>
+        <a href="https://unstop.com/u/fardekha5786" target="_blank"><i class="fas fa-trophy tro"></i></a>
+        <a href="https://instagram.com/fardeen0910" target="_blank"><i class="fab fa-instagram ins"></i></a>
+
+        <a href="https://www.linkedin.com/in/fardeen-khan-469960256" target="_blank"><i class="fab fa-linkedin lin"></i></a>
+        
+      </div>
+      <img src="/image/1693219223961_new-removebg-preview.ico" alt="mylog" id="img_again">
+      <p>&copy; 2022 The Blue Ink. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+
+
 </div>
 </body>
+<script>
+
+    let form_1=document.querySelector(".form-container");
+    let cancel_form=document.getElementById("cancel-button")
+    let contain=document.querySelector(".container");
+    function showForm() {
+        form_1.style.display = "block";
+        contain.style.opacity="0.7";
+        
+    }
+    
+    // Hide the form overlay
+    function hideForm() {
+       form_1.style.display = "none";
+       contain.style.opacity="1";
+    }
+    // Attach the event to the cancel button
+    cancel_form.addEventListener("click", hideForm);
+</script>
+
 </html>
