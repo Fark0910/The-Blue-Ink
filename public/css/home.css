@@ -1269,7 +1269,7 @@ sp_4 sp_5*/
         margin-top:380px;
         text-align: center;
     }
-    .dynamic-text {
+    .dynamic-text_new {
 
         margin-left:70px;   
     
@@ -1281,17 +1281,17 @@ sp_4 sp_5*/
        
     }
     
-    .word {
+    .word_new{
         
         font-size: 1.7em;
         color: white;
         opacity: 0;
         font-style: bold;
         text-transform: capitalize;
-        animation: wipeInOut 5s ease-in-out infinite;
+       
     }
     
-    .feedback-container {
+    .feedback-container_new {
         background-color:whitesmoke;
         padding: 20px 30px;
         border-radius: 10px;
@@ -1306,7 +1306,7 @@ sp_4 sp_5*/
     
      
     
-      .feedback-container label {
+      .feedback-container_new label {
         display: block;
         margin-bottom: 5px;
         font-size:3em;
@@ -1315,8 +1315,8 @@ sp_4 sp_5*/
         color: #555555;
       }
     
-      .feedback-container input,
-      .feedback-container textarea {
+      .feedback-container_new input,
+      .feedback-container_new textarea {
         width: 96%;
         padding: 20px;
         margin-bottom: 20px;
@@ -1325,12 +1325,12 @@ sp_4 sp_5*/
         font-size: 25px;
       }
     
-      .feedback-container textarea {
+      .feedback-container_new textarea {
         resize: none;
         height: 140px; 
       }
     
-      .feedback-container button {
+      .feedback-container_new button {
         width: 100%;
         padding: 10px;
         font-size: 2.8em;
@@ -1338,7 +1338,7 @@ sp_4 sp_5*/
        
       }
     
-      .feedback-container button:hover {
+      .feedback-container_new button:hover {
         background-color:#6558de ;
       }
      
@@ -1359,14 +1359,14 @@ sp_4 sp_5*/
       
     
       
-      .social-media {
+      .social-media_new {
         position: absolute;
         margin-left: 480px;
         margin-top: 270px;
         
       }
       
-      .social-media a {
+      .social-media_new a {
         border-radius: 1000px;
         color: rgb(255, 255, 255);
         margin: 0 10px;
