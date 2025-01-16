@@ -1,32 +1,49 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const path = require('path');
+const mailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const mysql = require('mysql2'); 
+const { v4: uuidv4 } = require('uuid');
+const stud_uuid=uuidv4();
+
 //const redditData = require('./data.json');
 app.use(express.static(path.join(__dirname, 'public')));
-
+const axios = require('axios');
+const { resolveAny } = require("dns");
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
+app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.json()); 
+
+const connection = mysql.createConnection({ 
+    host:  process.env.sqlDB_HOST,                                                                         
+    user: process.env.sqlDB_USER, 
+    password: process.env.sqlDB_PASS, 
+    database: process.env.sqlDB_NAME,
+    port:process.env.sqlDB_port,
+    authPlugins: {
+        caching_sha2_password: mysql.authCachingSha2Password
+      },
+    
+    connectTimeout:10000
+});
+connection.connect((err) => { if (err) { 
+    console.error('Error connecting to the database:', err.stack); 
+    return; } 
+    console.log('Connected to the database as id', connection.threadId); 
+}); 
+/*//learning path references//
+connection.query('SELECT * FROM Book_suggest', (err, results, fields) => { 
+    if (err) { console.error('Error executing query:', err.stack); 
+        return;
+
+     } 
+console.log('Results:', results); }); 
+*/
 /*
-app.use((req,res)=>{
-    //incoming http req is parsed to object
-    //check using console.log(dir)
-    //console.log("youe request recieved")
-    res.send('hi welcome') //to send html use link or `{your content}`
-})*/
-
-/*
-app.get('/',(req,res)=>{
-    res.send('home page')
-})
-app.get('/About',(req,res)=>{
-    res.send('this is About page')
-})
-app.get('/Course',(req,res)=>{
-    res.send('this is course page')
-})
-
-
 //gen req
 app.get('/r/:subreddit/:postId', (req, res) => {
     const { subreddit, postId } = req.params;
@@ -42,10 +59,136 @@ app.get('/search', (req, res) => {
     }
 })*/
 arr=["Dive" ,"deep" ,"into" ,"the" ,"mysteries" ,"of" ,"the" ,"cosmos", "where", "physics,", "chemistry,","and", "math", "reveal" ,"the", "unknown."] 
-
+image_arr=["chem","reactions-rearrangements-reagents-sanyal-500x500","Rcm","jdlee","phy","mat","cengage-jee-advanced-coordinate-geometry","vinay kumar","hallz","cengage-jee-advanced-coordinate-geometry","pathfinder-for-olympiad-and-jee-advanced-physics","morin"]
 app.get('/', (req, res) => {
     res.render('home',{arr:arr})
     console.log(arr.length)
+})
+let toast="";
+app.get('/Pdf', (req, res) => {
+    
+   
+    let book_cover="";
+    res.render('Pdf',{book_cover,image_arr,toast})
+   
+})
+//just for checking purpose//
+app.get('/checker', (req, res) => {
+    
+    res.render('checker')
+   
+})
+app.get('/Pdf/search', async(req, res) => {
+    image_arr_2=["chem","reactions-rearrangements-reagents-sanyal-500x500","Rcm","jdlee","phy","mat"]
+    const inp =req.query.bookz_name
+    //searchQuery = inp.replace(/\s+/g, '+');
+    
+    try{
+        const content=await axios.get(`https://openlibrary.org/search.json?q=${inp}`);
+        console.log(content)
+        const book = content.data.docs;
+
+        const book_id=book.cover_i
+        const book_rate=book.ratings_average
+        console.log('Cover URL:', book_id)
+        book_cover=`https://covers.openlibrary.org/b/id/${book_id}-L.jpg`
+       
+        console.log(book.ratings_average,book.author_name)
+       
+        res.render('Pdf',{book,book_cover,image_arr,toast})
+      
+    
+
+    }catch(error){
+        console.log("cant find book!!",error)
+        res.status(500).send('Error fetching book details');
+    }
+
+   /* const [Valuz,Valz]=Object.values(req.params)
+    console.log(req.params)
+    console.log(Valuz)
+    console.log(Valz)
+    res.render('checker',{Valuz,Valz})*/
+    
+})
+app.post('/suggestion',(req, res) => {
+   
+    const { bookName, authorName, email } = req.body;
+    
+    //console.log(bookName," ",authorName," ",email)
+    const transporter = mailer.createTransport({ 
+        service: 'gmail', 
+        
+        
+        auth: { user: process.env.my_email,
+                pass: process.env.email_pass
+
+        } });
+        const mailOptions = { 
+            from:process.env.my_email , 
+            to: email, 
+            subject: 'Thank You!', 
+            text: `Thank you for providing the book details: ${bookName} by ${authorName}.` 
+        };
+        transporter.sendMail(mailOptions, (error, info) => { 
+            if (error) { return console.log(error); } 
+            console.log('Email sent'); 
+             });
+   
+
+//railway hosted mysql db operation 
+    const sql = 'INSERT INTO book_suggest (Bookname,  Authorname ) VALUES (?, ?)'; 
+    /*
+    connection.query('SHOW TABLES', (err, results) => {
+        if (err) {
+          console.error('Error showing tables:', err);
+          return;
+        }
+        console.log('Tables in the database:',results);
+      });*/
+    connection.query(sql, [bookName, authorName], (err, result) => {
+        if (err) { console.error('Error inserting data:', err.stack); 
+            res.status(500).send('Error inserting data into the database'); 
+            return; } 
+        
+            
+    });
+   
+    toast="reached";
+    res.redirect('/pdf')
+    
+    
+
+})
+app.post('/feedback',(req, res) => {
+    const { name, school, feedback } = req.body;
+    const sql = 'INSERT INTO feedback_matters(name,feedback,schoolcollege) VALUES (?, ?, ?)'; 
+    connection.query(sql, [name, feedback ,school ], (err, result) => {
+        if (err) { console.error('Error inserting data:', err.stack); 
+            res.status(500).send('Error inserting data into the database'); 
+            return; } 
+    });
+    
+    res.redirect('/')
+
+
+})
+
+
+app.post('/studregistration',(req, res) => {
+    const { firstname,lastname,state,country,classname,exam,password} = req.body;
+    const sql = 'INSERT INTO student_reg(stud_id,firstname,lastname,state,country,class,exam,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'; 
+    connection.query(sql, [stud_uuid,firstname,lastname,state,country,classname,exam,password], (err, result) => {
+        if (err) { console.error('Error inserting data:', err.stack); 
+            res.status(500).send('Error inserting data into the database'); 
+            return; } 
+    });
+
+    
+    
+    res.redirect('/')
+
+
 })
 app.listen(300,()=>{
     console.log("server is running!!")
