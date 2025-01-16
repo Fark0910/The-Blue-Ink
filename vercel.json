@@ -1,5 +1,13 @@
 {
-    "version": 2,
+    "version": 2, 
+
+    "functions": {
+        "api//*.{js,ts}": {
+          "maxDuration": 60
+        }
+      },
+    
+
     "builds": [
       {
         "src": "index.js",
@@ -12,5 +20,7 @@
         "dest": "/index.js"
       }
     ]
+    
   }
+  
   
