@@ -17,6 +17,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); 
+// Import SendGrid SDK
+const sgMail = require('@sendgrid/mail');
+
+// Set API Key from environment variables
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+// Define the email options
 
 const connection = mysql.createConnection({ 
     host:  process.env.sqlDB_HOST,                                                                         
@@ -116,6 +123,24 @@ app.post('/suggestion',(req, res) => {
     const { bookName, authorName, email } = req.body;
     
     //console.log(bookName," ",authorName," ",email)
+    const msg = {
+        to: email, // recipient's email
+        from: process.env.my_email, // verified sender email in SendGrid
+        subject: 'Thank You!',
+        text: `Thank you for providing the book details: ${bookName} by ${authorName}.` ,
+       
+      };
+      
+      // Send the email
+      sgMail
+        .send(msg)
+        .then(() => {
+          console.log('Email sent');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+        /*
     const transporter = mailer.createTransport({ 
         service: 'gmail', 
         
@@ -134,7 +159,7 @@ app.post('/suggestion',(req, res) => {
             if (error) { return console.log(error); } 
             console.log('Email sent'); 
              });
-   
+   */
 
 //railway hosted mysql db operation 
     const sql = 'INSERT INTO book_suggest (Bookname,  Authorname ) VALUES (?, ?)'; 
