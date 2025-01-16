@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=-1.1">
     <title>The Blue Ink</title>
     <link rel="stylesheet" type="text/css" href="/css/home.css">
+
     <link rel="icon" type="image/x-icon" href="/image/1693219223961_new-removebg-preview.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
@@ -20,9 +21,9 @@
         
         <ul>
             <li><select id="drop"><option disabled selected>Course</option></select></li>
-            <li id="line_h"><a href="#" >About</a></li>
+            <li id="line_h"><a href="" >About</a></li>
             <li id="line_h"><a href="#" >Lecture Videos</a></li>
-            <li id="line_h"><a href="#" >Books</a></li>
+            <li id="line_h"><a href="/Pdf" >Books</a></li>
         </ul>
        
     
@@ -96,12 +97,12 @@
                 <h2 id="regist">Register</h2>
                 <button id="cancel-button" class="cancel-btn">&times;</button>
             </div>
-            <form>
+            <form action="/studregistration" method="post">
                 <label for="first-name">First Name</label>
-                <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+                <input type="text" id="first-name" name="firstname" placeholder="Enter your first name" required>
     
                 <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+                <input type="text" id="last-name" name="lastname" placeholder="Enter your last name" required>
     
                 <label for="state">State</label>
                 <input type="text" id="state" name="state" placeholder="Enter your state" required>
@@ -148,18 +149,21 @@
 
 
   <div class="feedback-container feedback-container_new">
+   <form action="/feedback" method="post">
     <h2>Feedback Form</h2>
     <label for="name">Name</label>
-    <input type="text" id="name" placeholder="Your Name">
+    <input type="text" id="name" name="name" placeholder="Your Name">
 
     <label for="school">School/College</label>
-    <input type="text" id="school" placeholder="Your School/College">
+    <input type="text" id="school" name="school" placeholder="Your School/College">
 
     <label for="feedback">Feedback</label>
-    <textarea id="feedback" placeholder="Your Feedback"></textarea>
+    <textarea id="feedback" name="feedback" placeholder="Your Feedback"></textarea>
 
-    <button>Submit</button>
+    <button  type="submit">Submit</button>
+   </form>
   </div>
+  
  
 
   <footer>

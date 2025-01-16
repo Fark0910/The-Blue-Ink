@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink's Book Hub</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/pdf.css">
+    <link rel="icon" type="image/x-icon" href="/image/1693219223961_new-removebg-preview.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid nav_bg ">
+        <nav class="navbar  navbar-expand-lg " style="position:sticky">
+            <div class="container-fluid pl-0 pt-2 pb-2 ">
+              <a class="navbar-brand ml-0 " href="#"> <img class="book_logo" src="/image/book_4.ico" alt="book" width="55" height="50"></a>
+              <h2 class=" text-white mr-5 ">Ink's Books</h2>
+              <button class=" navbar-toggler"  type="button" data-toggle="collapse" data-target="#combiner" aria-controls="combiner" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fas fa-bars text-white "></span>
+              </button>
+              <div class="collapse navbar-collapse  mt-1 pl-5 " id="combiner" >
+                <ul class="navbar-nav me-auto ml-5 mb-lg-0   res_2">
+                  <li class="nav-item pr-4 ml-3  res_1">
+                    <a class="nav-link hoverz res_cent" aria-current="page" href="/"><h5 class="text-white" style="font-size: 1.4rem;">Home</h5></a>
+                  </li>
+                  <li class="nav-item pr-4 ml-3 res_1">
+                    <a class="nav-link hoverz" aria-current="page" href="#"><h5 class="text-white"  style="font-size: 1.4rem;">Problems</h5></a>
+                  </li>
+                  <li class="nav-item pr-4 ml-3 res_1">
+                    <a class="nav-link hoverz" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#suggest"><h5 class="text-white"   style="font-size: 1.4rem;">Suggest</h5></a>
+
+                    <!--<button class="btn nav-link hoverz text-white" aria-current="page" data-bs-toggle="modal" data-bs-target="#suggest" style="font-size: 1.4rem;">Suggest</button>-->
+                    
+                  </li>
+                 
+                </ul>
+                <form class="d-flex ml-5 pl-3 w-75  res_search_form" role="search" action="/Pdf/search" method="GET">
+                  <input class="form-control me-5 ml-5 mr-2  res_search " style="border-radius: 300px;" type="search" name="bookz_name"placeholder="Search for book" aria-label="Search">
+                  <button class="btn btn-outline-light text-white mr-1"  style="border-radius: 300px;" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+          
+        </div>
+ 
+          <!-- modal for book suggest-->
+          <div class="modal fade" id="suggest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Suggest a Book</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/suggestion" method="post" id="suggestForm" > 
+                    <div class="mb-3"> 
+                    <label for="bookName" class="form-label">Book Name</label> 
+                    <input type="text" class="form-control" id="bookName" name="bookName"> </div> 
+                    <div class="mb-3"> <label for="authorName" class="form-label">Author Name</label> 
+                      <input type="text" class="form-control" id="authorName" name="authorName"> </div> 
+                      <div class="mb-3"> <label for="email" class="form-label">Your Email</label> 
+                        <input type="email" class="form-control" id="email" name="email" > </div>
+                    <button type="submit"  class="btn btn-primary">submit</button>
+                    
+                    
+                    
+
+                </div>
+               
+              </div>
+            </div>
+            
+  
+          </div>
+          
+          <div class="toast-container position-fixed w-25 p-1" style=" z-index: 1000; top: 80%; left: 73%; ">
+            <div id="liveToast" class="toast  " style=" z-index: 1001" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <img src="" class="rounded me-2"  alt="feed">
+                <strong class="me-auto">feed</strong>
+                <small>2s ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                Thanks for your suggestion!!
+              </div>
+            </div>
+          </div>    
+      
+        
+        
+     
+      <div class="container-fluid bg-secondary  pl-0 pr-0 mt-0.5">
+        <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner  ">
+            <div class="carousel-item active ">
+              <img class="d-block  w-100 " style="height: 32rem;" src="/image/compete_1.png" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100"  style="height: 32rem;" src="/image/compete_2.png" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100 h-25-sm"  style="height: 32rem;" src="/image/compete_3.png" alt="Third slide">
+            </div>
+          </div>
+          <a class="carousel-control-prev prev_addr" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next next_addr" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      
+      <div class="container-fluid h-75 edu  container_3 pl-0 pr-0 mt-0">
+       <div class="row w-100 justify-content-center justify-content-lg-start "  >
+        <div class="col-12 col-xl-4 mb-3">
+         <div id="carouselz" class="carousel slide h-25 " data-ride="carousel">
+          <div class=" carousel-inner  " >
+            <div class="carousel-item active card_shape_pers ">
+                  <div class="card card_shape mx-auto "style="width: 18rem;">
+                    <img class="card-img-top card_shape_image" style="height:21rem" src="/image/<%=image_arr[0]%>.png">
+                    <div class="card-body">
+                      <h5 class="card-title text-center">Chemistry</h5>
+                      
+                     
+                    </div>
+                  </div>
+              </div>
+        
+           
+              <div class="carousel-item card_shape_pers ">
+                    <div class="card card_shape mx-auto " style="width: 18rem;">
+                      <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[1]%>.webp" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title" style="font-size: 0.78rem;"><b>Reactions,Rearrangements and Reagents</b></h5>
+                        <p class="card-text" >encompassess major reagents, emphasize mechanaism and highlight important rearrangement steps </p>
+                        <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                        <h5 style="margin-left:6rem;font-size: 0.7rem; display:inline-block"><b>-By SN Sanyal</b></h5>
+                        
+                      </div>
+                    </div>
+              </div>
+              <div class="carousel-item card_shape_pers">
+                <div class="card card_shape  mx-auto" style="width: 18rem;">
+                  <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[2]%>.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size: 0.78rem;"><b>Modern appraoch to Chem Calc</b> </h5>
+                    <p class="card-text" >Simple approach and unknown methods you need to master Mole concept and related physical chemistry topics. </p>
+                    <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                    <h5 style="margin-left:5rem;font-size: 0.7rem; display:inline-block"><b>-By RC Mukharjee</b></h5>
+                    
+                  </div>
+                </div>
+              </div>
+            <div class="carousel-item card_shape_pers">
+                <div class="card card_shape mx-auto" style="width: 18rem;">
+                  <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[3]%>.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size: 0.78rem;"><b>Concise Inorganic chemistry</b></h5>
+                    <p class="card-text">Summarized version of JD lee particularly for Jee aspirants with valid answers to exceptions and trouble you are in</p>
+                    <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                    <h5 style="margin-left:4rem;font-size: 0.7rem; display:inline-block"><b>-By Sudarshan Guha</b></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <a class="carousel-control-prev sec_addr_prev " href="#carouselz" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon d-xl-block d-none" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next sec_addr_next"href="#carouselz" role="button" data-slide="next">
+            <span class="carousel-control-next-icon d-xl-block d-none" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-12 col-xl-4 mb-3">
+        <div id="carouselz_2" class="carousel slide h-25 " data-ride="carousel">
+       
+          <div class=" carousel-inner " >
+            <div class="carousel-item active card_shape_pers ">
+              <div class="card card_shape mx-auto " style="width: 18rem;">
+                <img class="card-img-top card_shape_image" style="height:21rem" src="/image/<%=image_arr[4]%>.png">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Physics</h5>
+                  
+                 
+                </div>
+              </div>
+          </div>
+             <div class="carousel-item card_shape_pers  ">
+                   <div class="card card_shape  mx-auto" style="width: 18rem;">
+                     <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[9]%>.webp" alt="Card image cap">
+                     <div class="card-body">
+                       <h5 class="card-title" style="font-size: 0.78rem;"><b>Cengage physics</b></h5>
+                       <p class="card-text">Good set of books with primary focus on jee advanced.Mechanics-1,2 and electrostatic ones you cant miss in this series</p>
+                       <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                      <h5 style="margin-left:4rem;font-size: 0.7rem; display:inline-block"><b>-By BM Sharma</b></h5>
+                      
+                      </div>
+                   </div>
+             </div>
+             <div class="carousel-item card_shape_pers">
+               <div class="card card_shape  mx-auto" style="width: 18rem; ">
+                 <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[10]%>.webp" alt="Card image cap">
+                 <div class="card-body">
+                   <h5 class="card-title" style="font-size: 0.78rem;" ><b>Pathfinder</b></h5>
+                   <p class="card-text">Good set of tough problems require strong foundation in fundamentals and some complex topics.</p>
+                   <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                   <h5 style="margin-left:4rem;font-size: 0.7rem; display:inline-block"><b>-By Arvind Tiwari</b></h5>
+                   
+                  </div>
+               </div>
+             </div>
+           <div class="carousel-item card_shape_pers">
+               <div class="card card_shape mx-auto" style="width: 18rem; ">
+                 <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[11]%>.png" alt="Card image cap">
+                 <div class="card-body">
+                   <h5 class="card-title" style="font-size: 0.78rem;"><b>Classical mechanics</b></h5>
+                   <p class="card-text">Must checkout book for jee advanced aspirant.Explaination in problemscan help you to excel complex problems in competition</p>
+                   <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                   <h5 style="margin-left:4rem;font-size:0.7rem; display:inline-block"><b>-By David Morin</b></h5>
+                   
+                  </div>
+               </div>
+             </div>
+           </div>
+         <a class="carousel-control-prev sec_addr_prev_2 "  href="#carouselz_2" role="button" data-slide="prev">
+           <span class="carousel-control-prev-icon d-xl-block d-none" aria-hidden="true"></span>
+           <span class="sr-only">Previous</span>
+         </a>
+         <a class="carousel-control-next sec_addr_next_2 "  href="#carouselz_2" role="button" data-slide="next">
+           <span class="carousel-control-next-icon d-xl-block d-none" aria-hidden="true"></span>
+           <span class="sr-only">Next</span>
+         </a>
+       </div>
+     </div>
+     <div class="col-12  col-xl-4" >
+      <div id="carouselz_3" class="carousel slide h-25 " data-ride="carousel">
+     
+        <div class=" carousel-inner">
+          <div class="carousel-item active card_shape_pers ">
+            <div class="card card_shape mx-auto " style="width: 18rem;">
+              <img class="card-img-top card_shape_image" style="height:21rem" src="/image/<%=image_arr[5]%>.png">
+              <div class="card-body">
+                <h5 class="card-title text-center">Maths</h5>
+                
+               
+              </div>
+            </div>
+        </div>
+           <div class="carousel-item  card_shape_pers ">
+                 <div class="card card_shape  mx-auto" style="width: 18rem; ">
+                   <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[6]%>.webp" alt="Card image cap">
+                   <div class="card-body">
+                     <h5 class="card-title" style="font-size: 0.78rem;"><b>Cengage co-ordinate geometry</b></h5>
+                     <p class="card-text">Amazing text and elaborated content is what lies in its core.Problems are like cherry on the cake.</p>
+                     <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                     <h5 style="margin-left:7rem;font-size: 0.7rem; display:inline-block"><b>-By G.Tewani</b></h5>
+                    
+                    </div>
+                 </div>
+           </div>
+           <div class="carousel-item card_shape_pers">
+             <div class="card card_shape mx-auto " style="width: 18rem; ">
+               <img class="card-img-top card_shape_image " style="height:12rem" src="/image/<%=image_arr[7]%>.jpg" alt="Card image cap">
+               <div class="card-body">
+                 <h5 class="card-title" style="font-size:0.78rem;"><b>Integral Calculus</b></h5>
+                 <p class="card-text">One of the best summarized textbook on integrals.From zero level integrals to most difficult ones.</p>
+                 <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                 <h5 style="margin-left:6rem;font-size: 0.7rem; display:inline-block"><b>-By Vinay Kumar</b></h5>
+                
+                </div>
+             </div>
+           </div>
+         <div class="carousel-item card_shape_pers ">
+             <div class="card card_shape mx-auto" style="width: 18rem; ">
+               <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[8]%>.jpg" alt="Card image cap">
+               <div class="card-body">
+                 <h5 class="card-title" style="font-size:0.78rem;"><b>Higher Algebra</b></h5>
+                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                 <h5 style="margin-left:7rem;font-size: 0.7rem; display:inline-block"><b>-By Hall and Knight</b></h5>
+                </div>
+             </div>
+           </div>
+         </div>
+       <a class="carousel-control-prev  sec_addr_prev_3 "  href="#carouselz_3" role="button" data-slide="prev">
+         <span class="carousel-control-prev-icon d-xl-block d-none" aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+       </a>
+       <a class="carousel-control-next  sec_addr_next_3 "  href="#carouselz_3" role="button" data-slide="next">
+         <span class="carousel-control-next-icon d-xl-block d-none " aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+       </a>
+     </div>
+   </div>
+      
+    </div>
+   </div>
+   <div class="container-fluid edu pt-3 mt-0 container_5" > 
+ 
+    <div class="row w-100  justify-content-md-center justify-content-lg-start ">
+      <div class="col-12  mx-auto   col-xl-7 mb-3 h-50 ">
+       <div class="scrollable-container  overflow-auto scrollz scroll_shape  ">
+       <%if (book_cover!=="") {%>
+        
+
+          <div class="row  w-100 justify-content-center justify-content-lg-start "  >
+                <%for(let i=0;i<book.length;i++){%>
+                  <div class="col-12 col-lg-6 col-xl-4 mb-3">
+                     <div class="list-group card_shape_pers" id="bookList">
+                             <div class="card card_shape mx-auto" style="width: 14rem; ">
+                              <%if(book[i].cover_i){%>
+                                <img class="card-img-top card_shape_image" style="height:10rem; width:14rem;" src= "https://covers.openlibrary.org/b/id/<%= book[i].cover_i%>-L.jpg" alt="Card image cap">
+
+                              <%}else{%>
+                                <img class="card-img-top card_shape_image" style="height:10rem; width:14rem;" src= "/image/book_not_avail.png" alt="Card image cap">
+
+                                <%}%>
+                             
+                             <div class="card-body">
+                              <h5 class="card-title " style="font-size: 0.6rem;"><%=book[i].title%><i class="far fa-star star checked" data-value="1">
+                                <%if(!(isNaN(Math.round(book[i].ratings_average)))){%>
+                                </i> <%= Math.round(book[i].ratings_average)%></i>
+                                <%}else{%>
+                                </i> NA</i>
+                                  <%}%>
+                                </h5>
+                                <%if("first_sentence" in book[i]){%>
+                                  <p class="scrollable-container card-text overflow-auto"style="font-size: 0.6rem;height: 100px;" ><%=book[i].first_sentence%></p>
+                                <%}else{%>
+                                  <p class="scrollable-container text-center card-text overflow-auto"style="font-size: 0.7rem;height: 100px;" >No information available</p>
+                                <%}%>
+                              <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+                              <%if(book[i].author_name){%>
+                                <h5  style="margin-left:3rem;font-size: 0.5rem; display:block;margin-top: -2rem;">-By <%=book[i].author_name%></h5>
+
+                              <%}else{%>
+                                <h5 style="margin-left:3rem;font-size: 0.5rem; display:block;margin-top: -2rem;">-By Unknown</h5>
+
+                                <%}%>
+                             </div>
+                           </div>
+                          </div>
+                      </div>
+              <%}%>
+            </div>   
+          
+
+      <%}else{%>
+
+        
+        <h6 class="no_cardz  img_shape_pers" ><img class="image fluid  img_shape  "  style="width:2rem;height:2rem;" src= "/image/magnify.png" alt="search books">Books will appear here</h6>
+         
+      <%}%>
+      
+
+      </div>
+      </div>
+    <div class="col-12  mx-auto  col-xl-5 mb-3 img_shape_pers ">
+      <img class="image fluid search_bookz img_shape  "  src= "/image/search_new.png " alt="search books">
+
+  </div>
+  </div>
+
+  </div>
+  <div class="ccontainer-fluid ">
+    <footer class=" text-white pt-4 footz">
+      <div class="container">
+        <div class="row justify-content-center justify-content-lg-start ">
+          <div class="col-md-4  mt-lg-2 d-flex justify-content-center align-items-center d-md-block ">
+            <img src="/image/1693219223961_new-removebg-preview.ico"  style="width: 5rem;height:4rem;" alt="my Logo" class="img-fluid mb-2 footz_img ml-lg-5">
+          </div>
+          
+          <div class="col-md-4  mt-lg-2 d-flex justify-content-center align-items-center d-md-block  ">
+            <h5 class="text-center mr-lg-5" >Follow Us</h5>
+            <div class="text-center mr-lg-5">
+            <a href="https://youtube.com/@theblueink...1814?si=GUD3A8iotN0lJ0hc" class="text-white mx-2"><i class="fab fa-youtube you"></i></a>
+            <a href="https://github.com/Fark0910" class="text-white mx-2"><i class="fab fa-github git"></i></a>
+            <a href="https://instagram.com/fardeen0910" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/fardeen-khan-469960256" class="text-white mx-2"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          </div>
+          <div class="col-md-4 text-md-right d-flex justify-content-center align-items-center d-md-block ">
+            <p class="mb-0  mt-lg-5" style="font-size: 1rem;">© 2022 the blue ink. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+</div>
+  <% if (toast==="reached"){%>
+  <script>
+    
+      const toastLive = document.getElementById('liveToast')
+      var toasted = new bootstrap.Toast(toastLive); 
+      toasted.show(); 
+      
+      
+      
+</script>
+<%toast=""%>
+<%}else{%>
+
+<%}%>
+</body>
+</html>
+
