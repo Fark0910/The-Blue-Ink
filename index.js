@@ -36,7 +36,7 @@ const pool = mysql.createPool({
         caching_sha2_password: mysql.authCachingSha2Password
       },
   waitForConnections: true,
-  connectionLimit: 100, 
+  connectionLimit: 1000, 
   queueLimit: 0 
 });
 
