@@ -24,24 +24,63 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Define the email options
+const db_connecting =async()=>{
+    try{
+        const connection = await mysql.createConnection({ 
+            host:  process.env.sqlDB_HOST,                                                                         
+            user: process.env.sqlDB_USER, 
+            password: process.env.sqlDB_PASS, 
+            database: process.env.sqlDB_NAME,
+            port:process.env.sqlDB_port,
+            authPlugins: {
+                caching_sha2_password: mysql.authCachingSha2Password
+              },
+            
+            connectTimeout:10000
+        }); 
+        connection.connect((err) => { if (err) { 
+            console.error('Error connecting to the database:', err.stack); 
+            return; } 
+            console.log('Connected to the database as id', connection.threadId); 
+           
+        }); return connection;
+        
+        
 
-const connection = mysql.createConnection({ 
-    host:  process.env.sqlDB_HOST,                                                                         
-    user: process.env.sqlDB_USER, 
-    password: process.env.sqlDB_PASS, 
-    database: process.env.sqlDB_NAME,
-    port:process.env.sqlDB_port,
-    authPlugins: {
-        caching_sha2_password: mysql.authCachingSha2Password
-      },
+    }catch(error){
+        console.error("error during connection setup:",error)
+       
+
+    }
+   
     
-    connectTimeout:10000
-});
-connection.connect((err) => { if (err) { 
-    console.error('Error connecting to the database:', err.stack); 
-    return; } 
-    console.log('Connected to the database as id', connection.threadId); 
-}); 
+
+
+    
+}
+const mailerz=async(email,bookName,authorName)=>{
+    try{
+        const msg = {
+            to: email, 
+            from: process.env.my_email, 
+            subject: 'Thank You!',
+            text: `Thank you for providing the book details: ${bookName} by ${authorName}.` ,
+           
+          };
+          
+         const mail_send= await sgMail.send(msg)
+         return mail_send;
+
+    }
+    catch(error){
+        console.error("email wont be send!!",error)
+    }
+    
+
+
+}
+
+
 /*//learning path references//
 connection.query('SELECT * FROM Book_suggest', (err, results, fields) => { 
     if (err) { console.error('Error executing query:', err.stack); 
@@ -118,28 +157,22 @@ app.get('/Pdf/search', async(req, res) => {
     res.render('checker',{Valuz,Valz})*/
     
 })
-app.post('/suggestion',(req, res) => {
+app.post('/suggestion',async(req, res) => {
    
     const { bookName, authorName, email } = req.body;
+        mailerz(email,bookName,authorName).then(()=>{
+            console.log("email sent!!");
+        }).catch((error)=>{
+            console.log("email not sent",error);})
+        
+    
+
+  
+   
+   
     
     //console.log(bookName," ",authorName," ",email)
-    const msg = {
-        to: email, // recipient's email
-        from: process.env.my_email, // verified sender email in SendGrid
-        subject: 'Thank You!',
-        text: `Thank you for providing the book details: ${bookName} by ${authorName}.` ,
-       
-      };
-      
-      // Send the email
-      sgMail
-        .send(msg)
-        .then(() => {
-          console.log('Email sent');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+ 
         /*
     const transporter = mailer.createTransport({ 
         service: 'gmail', 
@@ -162,22 +195,16 @@ app.post('/suggestion',(req, res) => {
    */
 
 //railway hosted mysql db operation 
+    const connect= await db_connecting();
     const sql = 'INSERT INTO book_suggest (Bookname,  Authorname ) VALUES (?, ?)'; 
-    /*
-    connection.query('SHOW TABLES', (err, results) => {
-        if (err) {
-          console.error('Error showing tables:', err);
-          return;
-        }
-        console.log('Tables in the database:',results);
-      });*/
-    connection.query(sql, [bookName, authorName], (err, result) => {
+    connect.query(sql, [bookName, authorName], (err, result) => {
         if (err) { console.error('Error inserting data:', err.stack); 
             res.status(500).send('Error inserting data into the database'); 
             return; } 
         
             
     });
+    connect.end();
    
     toast="reached";
     res.redirect('/pdf')
@@ -185,32 +212,31 @@ app.post('/suggestion',(req, res) => {
     
 
 })
-app.post('/feedback',(req, res) => {
+app.post('/feedback',async(req, res) => {
     const { name, school, feedback } = req.body;
+    const connect_1= await db_connecting();
     const sql = 'INSERT INTO feedback_matters(name,feedback,schoolcollege) VALUES (?, ?, ?)'; 
-    connection.query(sql, [name, feedback ,school ], (err, result) => {
+    
+
+    connect_1.query(sql, [name, feedback ,school ], (err, result) => {
         if (err) { console.error('Error inserting data:', err.stack); 
             res.status(500).send('Error inserting data into the database'); 
             return; } 
     });
-    
+    connect_1.end();
     res.redirect('/')
-
-
 })
 
-
-app.post('/studregistration',(req, res) => {
+app.post('/studregistration',async(req, res) => {
     const { firstname,lastname,state,country,classname,exam,password} = req.body;
+    const connect_2=await db_connecting();
     const sql = 'INSERT INTO student_reg(stud_id,firstname,lastname,state,country,class,exam,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'; 
-    connection.query(sql, [stud_uuid,firstname,lastname,state,country,classname,exam,password], (err, result) => {
+    connect_2.query(sql, [stud_uuid,firstname,lastname,state,country,classname,exam,password], (err, result) => {
         if (err) { console.error('Error inserting data:', err.stack); 
             res.status(500).send('Error inserting data into the database'); 
             return; } 
     });
-
-    
-    
+    connect_2.end();
     res.redirect('/')
 
 
