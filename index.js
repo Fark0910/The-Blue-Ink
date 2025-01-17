@@ -195,52 +195,97 @@ app.post('/suggestion',async(req, res) => {
    */
 
 //railway hosted mysql db operation 
-    const connect= await db_connecting();
-    const sql = 'INSERT INTO book_suggest (Bookname,  Authorname ) VALUES (?, ?)'; 
-    connect.query(sql, [bookName, authorName], (err, result) => {
-        if (err) { console.error('Error inserting data:', err.stack); 
-            res.status(500).send('Error inserting data into the database'); 
-            return; } 
-        
-            
-    });
-    connect.end();
-   
-    toast="reached";
-    res.redirect('/pdf')
-    
-    
+let connect_3;
 
-})
+try {
+ 
+  connect_3 = await db_connecting();
+
+  
+  const sql = 'INSERT INTO book_suggest (Bookname,  Authorname ) VALUES (?, ?)'; 
+
+
+  await connect_3.execute(sql,  [bookName, authorName]);
+
+  console.log('Data inserted successfully');
+  toast="reached";
+  res.redirect('/'); 
+} catch (err) {
+  console.error('Error inserting data:', err);
+  if (!res.headersSent) {
+    
+    res.status(500).send('Error inserting data into the database');
+  }
+} finally {
+  if (connect_3) {
+    await connect_3.end();
+    console.log('Database connection closed');
+  }
+
+}});
+
+
+ 
 app.post('/feedback',async(req, res) => {
     const { name, school, feedback } = req.body;
-    const connect_1= await db_connecting();
-    const sql = 'INSERT INTO feedback_matters(name,feedback,schoolcollege) VALUES (?, ?, ?)'; 
-    
+    let connect_1;
 
-    connect_1.query(sql, [name, feedback ,school ], (err, result) => {
-        if (err) { console.error('Error inserting data:', err.stack); 
-            res.status(500).send('Error inserting data into the database'); 
-            return; } 
-    });
-    connect_1.end();
-    res.redirect('/')
-})
+  try {
+   
+    connect_1 = await db_connecting();
+
+    
+    const sql = 'INSERT INTO feedback_matters(name, feedback, schoolcollege) VALUES (?, ?, ?)';
+    await connect_1.execute(sql, [name, feedback, school]);
+
+    console.log('Data inserted successfully');
+    res.redirect('/'); // Send a single response
+  } catch (err) {
+    console.error('Error inserting data:', err);
+    if (!res.headersSent) {
+      
+      res.status(500).send('Error inserting data into the database');
+    }
+  } finally {
+    if (connect_1) {
+      await connect_1.end();
+      console.log('Database connection closed');
+    }
+  
+  }});
+   
 
 app.post('/studregistration',async(req, res) => {
     const { firstname,lastname,state,country,classname,exam,password} = req.body;
-    const connect_2=await db_connecting();
-    const sql = 'INSERT INTO student_reg(stud_id,firstname,lastname,state,country,class,exam,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'; 
-    connect_2.query(sql, [stud_uuid,firstname,lastname,state,country,classname,exam,password], (err, result) => {
-        if (err) { console.error('Error inserting data:', err.stack); 
-            res.status(500).send('Error inserting data into the database'); 
-            return; } 
-    });
-    connect_2.end();
-    res.redirect('/')
+    let connect_2;
 
+    try {
+     
+      connect_2 = await db_connecting();
+  
+      
+      const sql = 'INSERT INTO student_reg(stud_id,firstname,lastname,state,country,class,exam,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'; 
 
-})
+      await connect_2.execute(sql, [stud_uuid,firstname,lastname,state,country,classname,exam,password]);
+  
+      console.log('Data inserted successfully');
+      res.redirect('/'); 
+    } catch (err) {
+      console.error('Error inserting data:', err);
+      if (!res.headersSent) {
+        
+        res.status(500).send('Error inserting data into the database');
+      }
+    } finally {
+      if (connect_2) {
+        await connect_2.end();
+        console.log('Database connection closed');
+      }
+    
+    }});
+
+    
+    
 app.listen(300,()=>{
     console.log("server is running!!")
 })
