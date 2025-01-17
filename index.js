@@ -36,7 +36,7 @@ const pool = mysql.createPool({
         caching_sha2_password: mysql.authCachingSha2Password
       },
   waitForConnections: true,
-  connectionLimit: 10, 
+  connectionLimit: 100, 
   queueLimit: 0 
 });
 
@@ -46,6 +46,7 @@ const pool = mysql.createPool({
 
 
 //hhhh
+/*
 const db_connecting =async()=>{
     try{
         const connection = await mysql.createConnection({ 
@@ -74,12 +75,12 @@ const db_connecting =async()=>{
        
 
     }
-   
-    
-
-
-    
 }
+    */
+
+
+    
+
 const mailerz=async(email,bookName,authorName)=>{
     try{
         const msg = {
