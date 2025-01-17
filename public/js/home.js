@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let slid=document.querySelector(".slider");
     let im=document.querySelector(".i1");
     let col=document.querySelector(".checks");
-   
+    let log_but=document.querySelector("#butt");
+    let lec_but=document.querySelector(".butt_1");
+    
     let bttn=document.querySelector("#drop");
     let appear_1=document.querySelector("#appear_1");
     let appear_2=document.querySelectorAll("#appear_2");
@@ -32,8 +34,27 @@ document.addEventListener('DOMContentLoaded', function() {
        
 
         setTimeout(()=>{
+            //trigger events
+                    window.addEventListener('load',()=>{
+                        vido.play();})
                     vido.addEventListener('mouseover',()=>{
                         vido.play();})
+                    over.addEventListener('mouseover',()=>{
+                            vido.play();})
+                    bttn.addEventListener('mouseover',()=>{
+                        vido.play();})
+                    menu.addEventListener('scroll',()=>{
+                        vido.play();})
+                    document.addEventListener('mouseover',()=>{
+                        vido.play();})
+                    log_but.addEventListener('mouseover',()=>{
+                        vido.play();})
+                    log_but.addEventListener('click',()=>{
+                            vido.play();})
+                    lec_but.addEventListener('click',()=>{
+                        vido.play();})
+                    lec_but.addEventListener('mouseover',()=>{
+                            vido.play();})
                             
           
                 //vido.addEventListener('mouseover', () => { 
@@ -45,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(()=>{vid.play(); },100)
 
                 });*/
-        },1000);
+        },100);
     })
     .catch(()=>{
         console.log("cant load video!!")
