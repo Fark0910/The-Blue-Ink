@@ -24,6 +24,28 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Define the email options
+
+// Create a connection pool
+const pool = mysql.createPool({
+    host:  process.env.sqlDB_HOST,                                                                         
+    user: process.env.sqlDB_USER, 
+    password: process.env.sqlDB_PASS, 
+    database: process.env.sqlDB_NAME,
+    port:process.env.sqlDB_port,
+    authPlugins: {
+        caching_sha2_password: mysql.authCachingSha2Password
+      },
+  waitForConnections: true,
+  connectionLimit: 10, 
+  queueLimit: 0 
+});
+
+
+// Usage
+
+
+
+//hhhh
 const db_connecting =async()=>{
     try{
         const connection = await mysql.createConnection({ 
@@ -166,11 +188,6 @@ app.post('/suggestion',async(req, res) => {
             console.log("email not sent",error);})
         
     
-
-  
-   
-   
-    
     //console.log(bookName," ",authorName," ",email)
  
         /*
@@ -195,94 +212,51 @@ app.post('/suggestion',async(req, res) => {
    */
 
 //railway hosted mysql db operation 
-let connect_3;
-
-try {
- 
-  connect_3 = await db_connecting();
-
-  
-  const sql = 'INSERT INTO book_suggest (Bookname,  Authorname ) VALUES (?, ?)'; 
+    const sql = 'INSERT INTO book_suggest (Bookname,  Authorname ) VALUES (?, ?)'; 
 
 
-  await connect_3.execute(sql,  [bookName, authorName]);
+    pool.query(sql, [bookName, authorName], (err, results) => {
+       if (err) {
+         console.error('Error inserting data:', err.message);
+         return;
+       }
+       console.log('Data inserted successfully:', results);});
+    toast="reached";
+    res.redirect('/Pdf'); 
 
-  console.log('Data inserted successfully');
-  toast="reached";
-  res.redirect('/'); 
-} catch (err) {
-  console.error('Error inserting data:', err);
-  if (!res.headersSent) {
-    
-    res.status(500).send('Error inserting data into the database');
-  }
-} finally {
-  if (connect_3) {
-    await connect_3.end();
-    console.log('Database connection closed');
-  }
-
-}});
+});
 
 
  
 app.post('/feedback',async(req, res) => {
     const { name, school, feedback } = req.body;
-    let connect_1;
-
-  try {
-   
-    connect_1 = await db_connecting();
-
-    
     const sql = 'INSERT INTO feedback_matters(name, feedback, schoolcollege) VALUES (?, ?, ?)';
-    await connect_1.execute(sql, [name, feedback, school]);
-
-    console.log('Data inserted successfully');
-    res.redirect('/'); // Send a single response
-  } catch (err) {
-    console.error('Error inserting data:', err);
-    if (!res.headersSent) {
-      
-      res.status(500).send('Error inserting data into the database');
-    }
-  } finally {
-    if (connect_1) {
-      await connect_1.end();
-      console.log('Database connection closed');
-    }
+    pool.query(sql, [name, feedback, school], (err, results) => {
+        if (err) {
+          console.error('Error inserting data:', err.message);
+          return;
+        }
+        console.log('Data inserted successfully:', results);
+      });
+    res.redirect('/')
+   
   
-  }});
+  });
    
 
 app.post('/studregistration',async(req, res) => {
     const { firstname,lastname,state,country,classname,exam,password} = req.body;
-    let connect_2;
+    const sql = 'INSERT INTO student_reg(stud_id,firstname,lastname,state,country,class,exam,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'; 
 
-    try {
-     
-      connect_2 = await db_connecting();
-  
-      
-      const sql = 'INSERT INTO student_reg(stud_id,firstname,lastname,state,country,class,exam,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'; 
-
-      await connect_2.execute(sql, [stud_uuid,firstname,lastname,state,country,classname,exam,password]);
-  
-      console.log('Data inserted successfully');
-      res.redirect('/'); 
-    } catch (err) {
-      console.error('Error inserting data:', err);
-      if (!res.headersSent) {
-        
-        res.status(500).send('Error inserting data into the database');
-      }
-    } finally {
-      if (connect_2) {
-        await connect_2.end();
-        console.log('Database connection closed');
-      }
+    pool.query(sql,[stud_uuid,firstname,lastname,state,country,classname,exam,password], (err, results) => {
+        if (err) {
+          console.error('Error inserting data:', err.message);
+          return;
+        }
+        console.log('Data inserted successfully:', results);});
+    res.redirect('/')
+});
     
-    }});
 
     
     

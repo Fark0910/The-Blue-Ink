@@ -1141,10 +1141,7 @@ input {
         margin-top:-330px;
     
     }
-    /*"area_1"
-"text_1"
-"sp_1"
-"sp_3"*/
+
     .img_3{
         width: 1250px;
         height: 1150px;
@@ -1201,11 +1198,7 @@ input {
         margin-top: 10px;
         margin-left: 530px;
     }
-    /*"area_2"
-"content_1"
-"sp_4"
-im_2
-sp_4 sp_5*/
+   
     .area_2{
         width:1200px;
         height:500px;
@@ -1284,11 +1277,12 @@ sp_4 sp_5*/
     
     .word_new{
         
-        font-size: 1.7em;
+        font-size: 1.4em;
         color: white;
         opacity: 0;
         font-style: bold;
-        text-transform: capitalize;
+        text-transform: capitalize; 
+       
        
     }
     
@@ -1401,4 +1395,24 @@ sp_4 sp_5*/
     
   
     
+}
+@media only screen and (max-width: 380px){
+    .i1{
+    
+        width:385%;
+      
+    }
+    .area_1{
+    
+        width:385%;
+        
+      
+       
+    
+    }
+    .vids{
+        width: 385%;
+    }
+      
+
 }
