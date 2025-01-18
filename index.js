@@ -8,7 +8,7 @@ const mysql = require('mysql2');
 const { v4: uuidv4 } = require('uuid');
 const stud_uuid=uuidv4();
 
-//const redditData = require('./data.json');
+
 app.use(express.static(path.join(__dirname, 'public')));
 const axios = require('axios');
 const { resolveAny } = require("dns");
@@ -17,15 +17,12 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'))
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()); 
-// Import SendGrid SDK
+
 const sgMail = require('@sendgrid/mail');
 
 // Set API Key from environment variables
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Define the email options
-
-// Create a connection pool
 const pool = mysql.createPool({
     host:  process.env.sqlDB_HOST,                                                                         
     user: process.env.sqlDB_USER, 
@@ -37,15 +34,11 @@ const pool = mysql.createPool({
       },
   waitForConnections: true,
   connectionLimit: 1000, 
-  queueLimit: 0 
+  queueLimit: 0
 });
 
 
-// Usage
-
-
-
-//hhhh
+/*without connection pooling*/
 /*
 const db_connecting =async()=>{
     try{
@@ -78,8 +71,6 @@ const db_connecting =async()=>{
 }
     */
 
-
-    
 
 const mailerz=async(email,bookName,authorName)=>{
     try{
@@ -257,9 +248,6 @@ app.post('/studregistration',async(req, res) => {
         console.log('Data inserted successfully:', results);});
     res.redirect('/')
 });
-    
-
-    
     
 app.listen(300,()=>{
     console.log("server is running!!")
