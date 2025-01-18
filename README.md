@@ -21,8 +21,11 @@ This is a simple website hosted using vercel .The homepage is created using core
 ## Cloud Database
 -Railway 
 ## mailing service
--sendgrid
-
+-sendgrid(under progress)
+## Load testing
+-loader.io(1:2,3:2,15:16 per second test)
+    -average response per user-(55ms-68ms)
+    
 ## Deployment
 The website is deployed using vercel https://the-blue-ink.vercel.app/
 ## Usage
