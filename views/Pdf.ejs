@@ -20,7 +20,7 @@
     <div class="container-fluid nav_bg ">
         <nav class="navbar  navbar-expand-lg " style="position:sticky">
             <div class="container-fluid pl-0 pt-2 pb-2 ">
-              <a class="navbar-brand ml-0 " href="#"> <img class="book_logo" src="/image/book_4.ico" alt="book" width="55" height="50"></a>
+              <a class="navbar-brand ml-0 " href="/Pdf"> <img class="book_logo" src="/image/book_4.ico" alt="book" width="55" height="50"></a>
               <h2 class=" text-white mr-5 ">Ink's Books</h2>
               <button class=" navbar-toggler"  type="button" data-toggle="collapse" data-target="#combiner" aria-controls="combiner" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fas fa-bars text-white "></span>
@@ -28,7 +28,7 @@
               <div class="collapse navbar-collapse  mt-1 pl-5 " id="combiner" >
                 <ul class="navbar-nav me-auto ml-5 mb-lg-0   res_2">
                   <li class="nav-item pr-4 ml-3  res_1">
-                    <a class="nav-link hoverz res_cent" aria-current="page" href="/"><h5 class="text-white" style="font-size: 1.4rem;">Home</h5></a>
+                    <a class="nav-link hoverz res_cent" aria-current="page" href="/loader"><h5 class="text-white" style="font-size: 1.4rem;">Home</h5></a>
                   </li>
                   <li class="nav-item pr-4 ml-3 res_1">
                     <a class="nav-link hoverz" aria-current="page" href="#"><h5 class="text-white"  style="font-size: 1.4rem;">Problems</h5></a>
@@ -42,8 +42,8 @@
                  
                 </ul>
                 <form class="d-flex ml-5 pl-3 w-75  res_search_form" role="search" action="/Pdf/search" method="GET">
-                  <input class="form-control me-5 ml-5 mr-2  res_search " style="border-radius: 300px;" type="search" name="bookz_name"placeholder="Search for book" aria-label="Search">
-                  <button class="btn btn-outline-light text-white mr-1"  style="border-radius: 300px;" type="submit">Search</button>
+                  <input class="form-control me-5 ml-2 mr-3  res_search " style="border-radius: 300px;" type="search" name="bookz_name"placeholder="Search for book" aria-label="Search">
+                  <button class="btn btn-outline-light text-white mr-1 tinker"  style="border-radius: 300px; " type="submit">Search</button>
                 </form>
               </div>
             </div>
@@ -60,7 +60,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form action="/suggestion" method="post" id="suggestForm" > 
+                  <form action="/suggestion"  method="post" id="suggestForm" > 
                     <div class="mb-3"> 
                     <label for="bookName" class="form-label">Book Name</label> 
                     <input type="text" class="form-control" id="bookName" name="bookName"> </div> 
@@ -68,7 +68,7 @@
                       <input type="text" class="form-control" id="authorName" name="authorName"> </div> 
                       <div class="mb-3"> <label for="email" class="form-label">Your Email</label> 
                         <input type="email" class="form-control" id="email" name="email" > </div>
-                    <button type="submit"  class="btn btn-primary">submit</button>
+                    <button type="submit"  class="btn btn-primary" style="background-color:#8278e2 ;">submit</button>
                     
                     
                     
@@ -78,19 +78,19 @@
               </div>
             </div>
             
-  
+
           </div>
           
           <div class="toast-container position-fixed w-25 p-1" style=" z-index: 1000; top: 80%; left: 73%; ">
-            <div id="liveToast" class="toast  " style=" z-index: 1001" role="alert" aria-live="assertive" aria-atomic="true">
+            <div id="liveToast" class="toast " style=" z-index: 1001; margin-left: -14rem;" role="alert" aria-live="assertive" aria-atomic="true">
               <div class="toast-header">
-                <img src="" class="rounded me-2"  alt="feed">
+                <img src="/image/1693219223961_new-removebg-preview.ico" style="width: 2rem;height: 2rem;" class="rounded me-2"  alt="feed">
                 <strong class="me-auto">feed</strong>
                 <small>2s ago</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
               </div>
               <div class="toast-body">
-                Thanks for your suggestion!!
+                Thanks for suggestion!!
               </div>
             </div>
           </div>    
@@ -294,9 +294,9 @@
                <img class="card-img-top card_shape_image" style="height:12rem" src="/image/<%=image_arr[8]%>.jpg" alt="Card image cap">
                <div class="card-body">
                  <h5 class="card-title" style="font-size:0.78rem;"><b>Higher Algebra</b></h5>
-                 <p class="card-text">Probably best book for mastering quadratic and series.Partial fraction and other foundational make it more useful</p>
+                 <p class="card-text">Master quadratic, series, Partial fraction other foundational make it more useful to beginners in algebra.</p>
                  <a href="#" class="btn btn-outline-primary" style="border-radius: 30px;"><i class="fa fa-download" aria-hidden="true"></i></a>
-                 <h5 style="margin-left:7rem;font-size: 0.7rem; display:inline-block"><b>-By Hall and Knight</b></h5>
+                 <h5 style="margin-left:6rem;font-size: 0.7rem; display:inline-block"><b>-By Hall and Knight</b></h5>
                 </div>
              </div>
            </div>
@@ -381,7 +381,7 @@
   </div>
 
   </div>
-  <div class="ccontainer-fluid ">
+  <div class="container-fluid willi">
     <footer class=" text-white pt-4 footz">
       <div class="container">
         <div class="row justify-content-center justify-content-lg-start ">

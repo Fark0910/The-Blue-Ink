@@ -8,6 +8,8 @@ const mysql = require('mysql2');
 const { v4: uuidv4 } = require('uuid');
 const stud_uuid=uuidv4();
 
+const morgans=require('morgan')
+app.use(morgans('tiny'))
 
 app.use(express.static(path.join(__dirname, 'public')));
 const axios = require('axios');
@@ -94,37 +96,35 @@ const mailerz=async(email,bookName,authorName)=>{
 
 }
 
-
-/*//learning path references//
-connection.query('SELECT * FROM Book_suggest', (err, results, fields) => { 
-    if (err) { console.error('Error executing query:', err.stack); 
-        return;
-
-     } 
-console.log('Results:', results); }); 
-*/
-/*
-//gen req
-app.get('/r/:subreddit/:postId', (req, res) => {
-    const { subreddit, postId } = req.params;
-    res.send(`<h1>Viewing Post ID: ${postId} on the ${subreddit} subreddit</h1>`)
-})
-//query string
-app.get('/search', (req, res) => {
-    const { q } = req.query;
-    if (!q) {
-        res.send('NOTHING FOUND IF NOTHING SEARCHED!')
-    } else {
-        res.send(`<h1>Search results for: ${q}</h1>`)
-    }
-})*/
+let toast="";
 arr=["Dive" ,"deep" ,"into" ,"the" ,"mysteries" ,"of" ,"the" ,"cosmos", "where", "physics,", "chemistry,","and", "math", "reveal" ,"the", "unknown."] 
 image_arr=["chem","reactions-rearrangements-reagents-sanyal-500x500","Rcm","jdlee","phy","mat","cengage-jee-advanced-coordinate-geometry","vinay kumar","hallz","cengage-jee-advanced-coordinate-geometry","pathfinder-for-olympiad-and-jee-advanced-physics","morin"]
+app.use((req, res, next) => {
+    if (req.originalUrl === '/' ) {
+        res.redirect('/loader');
+    } 
+ 
+    else{
+        next();
+   }
+ 
+});
+
+app.get('/loader', (req, res) => {
+    res.render('Loaderhand');
+});
+app.get('/loading', (req, res) => {
+    res.render('loading');
+});
+/*
 app.get('/', (req, res) => {
+    res.render('Loaderhand')
+    //console.log(arr.length)
+})*/
+app.get('/home', (req, res) => {
     res.render('home',{arr:arr})
     console.log(arr.length)
 })
-let toast="";
 app.get('/Pdf', (req, res) => {
     
    
@@ -230,7 +230,7 @@ app.post('/feedback',async(req, res) => {
         }
         console.log('Data inserted successfully:', results);
       });
-    res.redirect('/')
+    res.redirect('/home')
    
   
   });
@@ -246,9 +246,9 @@ app.post('/studregistration',async(req, res) => {
           return;
         }
         console.log('Data inserted successfully:', results);});
-    res.redirect('/')
+    res.redirect('/home')
 });
     
-app.listen(300,()=>{
+app.listen(400,()=>{
     console.log("server is running!!")
 })

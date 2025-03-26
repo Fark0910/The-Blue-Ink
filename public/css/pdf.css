@@ -139,8 +139,10 @@
 .scrollz{
     height: 50rem;
     width: 55rem;
-    margin-left: -0.5rem;
+    margin-left: 0.8rem;
     padding: 2rem;
+
+    
     
 
 
@@ -160,14 +162,17 @@
     margin-top: 25rem;
     margin-left:17rem;
     color: #0000009a;
+    
 
 }
+
 
 
   footer a {
     color: white;
     text-decoration: none;
     font-size: 1.2em;
+    
   }
   footer a:hover {
     text-decoration: underline;
@@ -176,7 +181,14 @@
     
     background-color: #7870c0;
     height: 10rem;
+   
+    margin-left: -3rem;
+    
+  
 
+}
+.willi{
+    padding-right: 0rem;
 
 }
 .footz_img{
@@ -214,9 +226,10 @@
     }
     .scrollz{
         height: 30rem;
-        width:46rem;
+        width:52rem;
         margin-left: 2.2rem;
         margin-right: 0.8rem;
+        margin-top:3rem;
 
    
    }
@@ -230,10 +243,24 @@
    
 }
 
+@media only screen and (max-width: 880px) {
+    
+    .scrollz{
+        height: 30rem;
+        width:45rem;
+        margin-left: 2.2rem;
+        margin-right: 0.8rem;
+        margin-top:3rem;
+
+   
+   }
+
+   
+}
 @media only screen and (max-width: 788px){
     .scrollz{
         height: 20em;
-        width:34rem;
+        width:40rem;
         margin-left: 1.6rem;
         margin-right: 0.8rem;
 
@@ -254,8 +281,16 @@
     font-size: 0.8rem;
     
 
-}
+}}
+@media only screen and (max-width: 688px){
+    .scrollz{
+        height: 20em;
+        width:34rem;
+        margin-left: 1.6rem;
+        margin-right: 0.8rem;
 
+           
+   }
 
     }
 
@@ -310,7 +345,17 @@
         }
         .res_search{
             
-            width: 5rem;
+            width: 8rem;
+            margin-left: -5rem;
+        
+           
+        }
+        .tinker{
+            margin-left: -1rem;
+
+        }
+        input::placeholder{
+            font-size: 0.8rem;
         }
         
             }

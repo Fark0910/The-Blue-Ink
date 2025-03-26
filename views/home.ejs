@@ -20,13 +20,13 @@
         <Button id="img_login"><img src="/image/Login_pic.ico" alt="mylog" id="img_login_pic" onclick="showForm()"></Button>
         
         <ul>
-            <li><select id="drop"><option disabled selected>Course</option></select></li>
-            <li id="line_h"><a href="" >About</a></li>
+            <!--<li><select id="drop"><option disabled selected>Course</option></select></li>-->
+            <li id="line_h"><a id="drop"  >Course</a></li>
+            <li id="line_h"><a href="#" >About</a></li>
             <li id="line_h"><a href="#" >Lecture Videos</a></li>
-            <li id="line_h"><a href="/Pdf" >Books</a></li>
+            <li id="line_h"><a href="/loading" >Books</a></li>
         </ul>
        
-    
     <div class="overlay">
         <div class="out_1">
             <div class="outlaw">
@@ -51,17 +51,10 @@
 
 
             </section>
-
-            
         </div>
-        
-
-        
     </div>
-   
- 
-
     </header>
+
     
     <button id="butt" onclick="showForm()">Login/Register</button>
     <div class="slider">
@@ -125,8 +118,6 @@
         </div>
     </div>
      <div class="dynamic-text dynamic-text_new">
-      
-           
             <span class="word word_new"><%=arr[0]%></span>
             <span class="word word_new"><%=arr[1]%></span>
             <span class="word word_new"><%=arr[2]%></span>
@@ -163,10 +154,12 @@
     <button  type="submit">Submit</button>
    </form>
   </div>
+  <div class="feedzz">
+  </div>
   
  
 
-  <footer>
+  <footer class="footer">
     <div class="footer-content footer-content_new">
       <div class="social-media social-media_new">
         <a href="https://youtube.com/@theblueink...1814?si=GUD3A8iotN0lJ0hc" target="_blank"><i class="fab fa-youtube you"></i></a>
@@ -181,10 +174,6 @@
       <p>&copy; 2022 The Blue Ink. All rights reserved.</p>
     </div>
   </footer>
-
-
-
-
 </div>
 </body>
 <script>
@@ -198,12 +187,12 @@
         
     }
     
-    // Hide the form overlay
+    
     function hideForm() {
        form_1.style.display = "none";
        contain.style.opacity="1";
     }
-    // Attach the event to the cancel button
+   
     cancel_form.addEventListener("click", hideForm);
 </script>
 
